@@ -1,0 +1,103 @@
+package com.gui;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class Main {
+
+	private static int function = 0;
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Sketchy jar");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(900,180);
+		frame.setLayout(new FlowLayout());
+		
+		JTextArea text1 = new JTextArea(5, 30);
+		JTextArea text2 = new JTextArea(5, 30);
+		JLabel inst1 = new JLabel("Enter Text:");
+		JLabel inst2 = new JLabel("Enter Text:");
+		JButton prompt = new JButton("Check if Strings are the same");
+		JLabel result = new JLabel("");
+		frame.add(inst1);
+		frame.add(new JScrollPane(text1));
+		frame.add(inst2);
+		frame.add(new JScrollPane(text2));
+		frame.add(prompt);
+		frame.add(result);
+		
+		JMenuBar menu = new JMenuBar();
+		JMenu actions = new JMenu("Actions");
+		JMenuItem same = new JMenuItem("Check if same");
+		JMenuItem differ = new JMenuItem("Check where they are different");
+		JMenuItem vowels = new JMenuItem("Check number of Vowels");
+		
+		frame.setJMenuBar(menu);
+		menu.add(actions);
+		actions.add(same);
+		actions.add(differ);
+		actions.add(vowels);
+		
+		same.addActionListener(src -> {
+			function = 0;
+			prompt.setText("Check if Strings are the same");
+		});
+		
+		differ.addActionListener(src -> {
+			function = 1;
+			prompt.setText("Check where Strings differ");
+		});
+		
+		vowels.addActionListener(src -> {
+			function = 2;
+			prompt.setText("Check if Strings have same number of vowels");
+		});
+		
+		prompt.addActionListener(src -> {
+			if(function == 0) {
+				if(text1.getText().equals(text2.getText())) {
+					result.setText("Strings are the same");
+				}else {
+					result.setText("Strings are not the same");
+				}
+			}
+			if(function == 1) {
+				for(int i = 0; i<Math.max(text1.getText().length(), text2.getText().length()); i++) {
+					if(i > text1.getText().length()) {
+						
+					}
+				}
+			}
+			if(function ==2) {
+				int a =0;
+				int b = 0;
+				for(int i =0 ; i<text1.getText().length(); i++) {
+					if(text1.getText().substring(i, i+1).equalsIgnoreCase("a") || text1.getText().substring(i, i+1).equalsIgnoreCase("e") || text1.getText().substring(i, i+1).equalsIgnoreCase("i") || text1.getText().substring(i, i+1).equalsIgnoreCase("o") || text1.getText().substring(i, i+1).equalsIgnoreCase("u")) {
+						a++;
+					}
+				}
+				for(int i =0 ; i<text2.getText().length(); i++) {
+					if(text2.getText().substring(i, i+1).equalsIgnoreCase("a") || text2.getText().substring(i, i+1).equalsIgnoreCase("e") || text2.getText().substring(i, i+1).equalsIgnoreCase("i") || text2.getText().substring(i, i+1).equalsIgnoreCase("o") || text2.getText().substring(i, i+1).equalsIgnoreCase("u")) {
+						b++;
+					}
+				}
+				if(a == b) {
+					result.setText("There are the same number of vowels");
+				}else {
+					result.setText("There are not the same number of vowels");
+				}
+			}
+		});
+		
+		frame.setVisible(true);
+	}
+
+}
